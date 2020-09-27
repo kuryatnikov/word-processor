@@ -99,25 +99,25 @@ namespace TxtCPU.Repositories
             }            
         }
 
-        private Diction[] InquiryResalt (string inquiry)
+        private Diction[] InquiryResalt(string inquiry)
         {
-            Diction[] Resalt = {};
+
             try
             {
                 int index = inquiry.Length;
                 using (DictionContext db = new DictionContext())
                 {
-                    Resalt = db.Dict.Where(x => x.Word.Substring(0, index) == inquiry)
-                                    .OrderByDescending(x => x.Repeat)
-                                    .ThenBy(x => x.Word).ToArray();
+                    return db.Dict.Where(x => x.Word.Substring(0, index) == inquiry)
+                                     .OrderByDescending(x => x.Repeat)
+                                     .ThenBy(x => x.Word).ToArray();
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                return null;
             }
-            
-            return Resalt;
+
         }
     }
 }
